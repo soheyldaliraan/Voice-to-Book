@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تبدیل صدا به متن فارسی</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css', v='1.0.1') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css', v='1.0.2') }}">
 </head>
 <body>
     <div id="loadingOverlay" class="loading-overlay">
@@ -86,7 +86,10 @@
         </div>
 
         <div class="processed-text-container" {% if not processed_text %}style="display: none;"{% endif %}>
-            <h2>متن پردازش شده برای: {{ processed_file }}</h2>
+            <h2>
+                متن پردازش شده
+                <span class="file-name">{{ processed_file }}</span>
+            </h2>
             <div class="text-controls">
                 <button class="button" onclick="copyText()">کپی متن</button>
                 {% if processed_text and processed_file %}

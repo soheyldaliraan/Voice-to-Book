@@ -120,6 +120,7 @@ body {
     margin-bottom: 10px;
     gap: 10px;
     background: white;
+    min-height: 45px;
 }
 .processed-text-container {
     margin: 20px 0;
@@ -127,6 +128,17 @@ body {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.processed-text-container h2 {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+.processed-text-container .file-name {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+    color: #666;
 }
 .processed-text {
     width: 100%;
@@ -163,7 +175,7 @@ body {
     color: white;
     padding: 2px 8px;
     border-radius: 12px;
-    font-size: 0.8em;
+    font-size: 0.75em;
     display: inline-block;
     margin-right: 8px;
 }
@@ -185,6 +197,8 @@ body {
     direction: ltr;
     text-align: left;
     padding: 0 5px;
+    font-size: 0.85em;
+    color: #666;
 }
 .pagination {
     display: flex;
@@ -244,6 +258,7 @@ body {
     .file-name {
         max-width: calc(100% - 90px);
         text-align: left;
+        font-size: 0.8em;
     }
 
     .latest-tag {
@@ -263,6 +278,14 @@ body {
 
     .file-list {
         padding: 10px;
+    }
+
+    .processed-text-container {
+        padding: 15px;
+    }
+
+    .processed-text-container h2 {
+        font-size: 1em;
     }
 }
 
