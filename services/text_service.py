@@ -19,10 +19,8 @@ class TextService:
         Keep the same words and meaning.
         Keep the text in Persian.
         Keep the text in the same order as the original text.
-        Keep the text in the same length as the original text.
-        Keep the text in the same words as the original text.
         Keep the text in the same meaning as the original text.
-        
+        If a word in the senctence is missing, complete it while keeping the same meaning.
         Text: {text}
         """
         
