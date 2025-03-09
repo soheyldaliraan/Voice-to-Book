@@ -105,17 +105,21 @@ body {
 }
 .file-list {
     margin: 20px 0;
+    background: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
 }
 .file-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 10px;
     border: 1px solid #e1e4e8;
     border-radius: 4px;
     margin-bottom: 10px;
     gap: 10px;
-    background: #f8f9fa;
+    background: white;
 }
 .processed-text-container {
     margin: 20px 0;
@@ -167,9 +171,9 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-grow: 1;
+    flex: 1;
     word-break: break-all;
-    justify-content: space-between;
+    justify-content: flex-start;
     max-width: 100%;
     overflow: hidden;
 }
@@ -177,7 +181,10 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: calc(100% - 60px); /* Account for the tag width */
+    max-width: calc(100% - 100px);
+    direction: ltr;
+    text-align: left;
+    padding: 0 5px;
 }
 .pagination {
     display: flex;
@@ -222,13 +229,12 @@ body {
     .file-item {
         text-align: center;
         padding: 8px;
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
     }
 
     .file-info {
-        justify-content: center;
-        margin-bottom: 8px;
+        justify-content: flex-start;
+        margin-bottom: 0;
         font-size: 0.9em;
         flex-direction: row;
         align-items: center;
@@ -236,7 +242,7 @@ body {
     }
 
     .file-name {
-        max-width: calc(100% - 70px);
+        max-width: calc(100% - 90px);
         text-align: left;
     }
 
@@ -253,6 +259,10 @@ body {
     .page-link {
         padding: 6px 12px;
         margin: 2px;
+    }
+
+    .file-list {
+        padding: 10px;
     }
 }
 
@@ -327,4 +337,18 @@ h2 {
         margin-top: 30px;
         padding: 15px 10px;
     }
+}
+
+.button.process-button {
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.file-list h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.file-list .pagination {
+    margin-bottom: 0;
 }
