@@ -12,7 +12,7 @@ env/
 ENV/
 
 # Output files
-*.txt
+/outputs/*.txt
 *.json
 
 # Docker
