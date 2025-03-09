@@ -40,7 +40,7 @@
             <div id="recordingControls" style="display: none;">
                 <form id="recordingForm" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
                     <input type="file" name="audio_blob" id="audioBlob" style="display: none;">
-                    <button type="submit" class="button">پردازش صدا</button>
+                    <button type="submit" class="button">آپلود صدا</button>
                 </form>
                 <button id="recordAgain" class="button" style="margin-top: 10px; background: #6c757d;">ضبط مجدد</button>
             </div>
@@ -52,7 +52,7 @@
                 {% for file in audio_files %}
                     <div class="file-item">
                         <div class="file-info">
-                            <span>{{ file.name }}</span>
+                            <span class="file-name">{{ file.name }}</span>
                             {% if loop.first and current_page == 1 %}
                                 <span class="latest-tag">آخرین</span>
                             {% endif %}
@@ -96,6 +96,15 @@
             <textarea id="processedText" class="processed-text" readonly>{{ processed_text }}</textarea>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>
+            طراحی و توسعه توسط 
+            <a href="https://soheyl-daliraan.com" target="_blank">سهیل دلیران</a>
+            |
+            <a href="https://github.com/soheyldaliraan/Voice-to-Book" target="_blank">مشاهده در گیت‌هاب</a>
+        </p>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

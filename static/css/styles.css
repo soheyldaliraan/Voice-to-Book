@@ -170,6 +170,14 @@ body {
     flex-grow: 1;
     word-break: break-all;
     justify-content: space-between;
+    max-width: 100%;
+    overflow: hidden;
+}
+.file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 60px); /* Account for the tag width */
 }
 .pagination {
     display: flex;
@@ -215,14 +223,21 @@ body {
         text-align: center;
         padding: 8px;
         flex-direction: column;
+        width: 100%;
     }
 
     .file-info {
         justify-content: center;
-        margin-bottom: 0;
+        margin-bottom: 8px;
         font-size: 0.9em;
         flex-direction: row;
         align-items: center;
+        width: 100%;
+    }
+
+    .file-name {
+        max-width: calc(100% - 70px);
+        text-align: left;
     }
 
     .latest-tag {
@@ -286,4 +301,30 @@ h2 {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .footer {
+        margin-top: 30px;
+        padding: 15px 10px;
+    }
 }
