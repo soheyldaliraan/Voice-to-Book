@@ -8,8 +8,13 @@ services:
     volumes:
       - ./assets:/app/assets
       - ./outputs:/app/outputs
-      - ./.env:/app/.env
-      - ./gcloud-key.json:/app/gcloud-key.json
+      # Use bind mount for config files
+      - type: bind
+        source: ./.env
+        target: /app/.env
+      - type: bind
+        source: ./gcloud-key.json
+        target: /app/gcloud-key.json
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=production
