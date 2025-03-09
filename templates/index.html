@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبدیل صدا به متن فارسی</title>
+    <style>
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .recorder-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .record-button {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        .record-button.recording {
+            animation: pulse 1.5s infinite;
+        }
+        .timer {
+            font-size: 1.2em;
+            margin: 10px 0;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        .audio-preview {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .messages {
+            margin: 20px 0;
+        }
+        .message {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .file-list {
+            margin: 20px 0;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .processed-text-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .processed-text {
+            width: 100%;
+            min-height: 300px;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            resize: vertical;
+        }
+        .text-controls {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .latest-tag {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+        
+        .page-link {
+            padding: 8px 16px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .page-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>تبدیل صدا به متن فارسی</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="message {% if 'error' in message.lower() %}error{% else %}success{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="recorder-container">
+            <h2>ضبط صدا</h2>
+            <div class="timer">۰۰:۰۰</div>
+            <div class="controls">
+                <button id="recordButton" class="record-button">شروع ضبط</button>
+                <button id="stopButton" class="button" style="display: none;">توقف</button>
+            </div>
+            <audio id="audioPreview" class="audio-preview" controls style="display: none;"></audio>
+            <div id="recordingControls" style="display: none;">
+                <form id="recordingForm" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="audio_blob" id="audioBlob" style="display: none;">
+                    <button type="submit" class="button">پردازش صدا</button>
+                </form>
+                <button id="recordAgain" class="button" style="margin-top: 10px; background: #6c757d;">ضبط مجدد</button>
+            </div>
+        </div>
+
+        <div class="file-list">
+            <h2>صداهای قبلی</h2>
+            {% if audio_files %}
+                {% for file in audio_files %}
+                    <div class="file-item">
+                        <div class="file-info">
+                            <span>{{ file.name }}</span>
+                            {% if loop.first and current_page == 1 %}
+                                <span class="latest-tag">آخرین</span>
+                            {% endif %}
+                        </div>
+                        <a href="{{ url_for('process_file', filename=file.name) }}" class="button">پردازش</a>
+                    </div>
+                {% endfor %}
+                
+                <!-- Pagination controls -->
+                <div class="pagination">
+                    {% if total_pages > 1 %}
+                        {% if current_page > 1 %}
+                            <a href="{{ url_for('index', page=current_page-1) }}" class="page-link">قبلی</a>
+                        {% endif %}
+                        
+                        {% for page_num in range(1, total_pages + 1) %}
+                            <a href="{{ url_for('index', page=page_num) }}" 
+                               class="page-link {% if page_num == current_page %}active{% endif %}">
+                                {{ page_num }}
+                            </a>
+                        {% endfor %}
+                        
+                        {% if current_page < total_pages %}
+                            <a href="{{ url_for('index', page=current_page+1) }}" class="page-link">بعدی</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>هنوز صدایی ضبط نشده است.</p>
+            {% endif %}
+        </div>
+
+        <div class="processed-text-container" {% if not processed_text %}style="display: none;"{% endif %}>
+            <h2>متن پردازش شده برای: {{ processed_file }}</h2>
+            <div class="text-controls">
+                <button class="button" onclick="copyText()">کپی متن</button>
+                {% if processed_text and processed_file %}
+                    <a href="{{ url_for('download_file', filename=processed_file + '_article.txt') }}" class="button">دانلود</a>
+                {% endif %}
+            </div>
+            <textarea id="processedText" class="processed-text" readonly>{{ processed_text }}</textarea>
+        </div>
+    </div>
+
+    <script>
+        // Convert English numbers to Persian
+        function toPersianNum(num) {
+            const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return num.toString().replace(/[0-9]/g, function(w) {
+                return persianNumbers[+w];
+            });
+        }
+
+        // Audio Recording functionality
+        let mediaRecorder;
+        let recordedChunks = [];
+        let startTime;
+        let timerInterval;
+        
+        const recordButton = document.getElementById('recordButton');
+        const stopButton = document.getElementById('stopButton');
+        const audioPreview = document.getElementById('audioPreview');
+        const timerDisplay = document.querySelector('.timer');
+        const recordingControls = document.getElementById('recordingControls');
+        const recordAgainButton = document.getElementById('recordAgain');
+        const recordingForm = document.getElementById('recordingForm');
+        
+        function resetRecording() {
+            audioPreview.style.display = 'none';
+            recordingControls.style.display = 'none';
+            recordButton.style.display = 'inline-block';
+            stopButton.style.display = 'none';
+            timerDisplay.textContent = '۰۰:۰۰';
+            recordedChunks = [];
+        }
+        
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${toPersianNum(minutes)}:${toPersianNum(seconds)}`;
+        }
+        
+        recordButton.addEventListener('click', async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                recordedChunks = [];
+                
+                mediaRecorder.addEventListener('dataavailable', (e) => {
+                    if (e.data.size > 0) recordedChunks.push(e.data);
+                });
+                
+                mediaRecorder.addEventListener('stop', () => {
+                    const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPreview.src = audioUrl;
+                    audioPreview.style.display = 'block';
+                    
+                    // Create a File object from the Blob
+                    const file = new File([audioBlob], 'recording.webm', { type: 'audio/webm' });
+                    
+                    // Create a FileList-like object
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    
+                    // Set the file input's files
+                    document.getElementById('audioBlob').files = dataTransfer.files;
+                    recordingControls.style.display = 'block';
+                });
+                
+                mediaRecorder.start();
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+                
+                recordButton.style.display = 'none';
+                stopButton.style.display = 'inline-block';
+                recordButton.classList.add('recording');
+                
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                alert('خطا در دسترسی به میکروفون. لطفا مجوز دسترسی به میکروفون را تایید کنید.');
+            }
+        });
+        
+        stopButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            clearInterval(timerInterval);
+            recordButton.style.display = 'none';
+            stopButton.style.display = 'none';
+            recordButton.classList.remove('recording');
+            
+            // Stop all audio tracks
+            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+        });
+        
+        recordAgainButton.addEventListener('click', () => {
+            resetRecording();
+        });
+
+        function copyText() {
+            const textarea = document.getElementById('processedText');
+            textarea.select();
+            document.execCommand('copy');
+            alert('متن کپی شد!');
+        }
+    </script>
+</body>
+</html> 

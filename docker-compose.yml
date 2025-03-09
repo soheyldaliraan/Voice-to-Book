@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./assets:/app/assets
+      - ./outputs:/app/outputs
+      - ./.env:/app/.env
+      - ./gcloud-key.json:/app/gcloud-key.json
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped 

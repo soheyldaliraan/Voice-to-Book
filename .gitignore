@@ -1,0 +1,32 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Output files
+*.txt
+*.json
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+
+*.ogg
+*.mp3
+*.wav
+*.m4a
+*.webm
+*.mov
+*.avi
+
+
+.DS_Store
