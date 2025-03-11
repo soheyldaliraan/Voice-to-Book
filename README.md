@@ -6,10 +6,13 @@
   <em>تبدیل صدای فارسی به متن ویرایش شده با قابلیت ذخیره سازی</em>
 </p>
 
-<div dir="rtl" style="font-family: 'Vazirmatn', 'Tahoma', sans-serif;">
-<style>
-  @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
-</style>
+<div align="center">
+  <b><a href="#-persian-voice-to-text-converter">⬇️ English information available below ⬇️</a></b>
+</div>
+
+<br>
+
+<div dir="rtl">
 
 ## 🔍 این برنامه چیست؟ 
 یک ابزار بسیار ساده برای تبدیل یادداشت های روزمره به مقاله ویرایش شده آماده ثبت در کتاب
