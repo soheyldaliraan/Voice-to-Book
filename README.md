@@ -1,23 +1,44 @@
-# تبدیل صدا به متن فارسی
-<div dir="rtl">
+# تبدیل صدا به متن کتاب فارسی 🎙️📚
 
-## راهنمای استفاده
+<p align="center">
+  <img src="/static/images/banner.png" alt="Voice to Book Banner" width="600">
+  <br>
+  <em>تبدیل صدای فارسی به متن ویرایش شده با قابلیت ذخیره سازی</em>
+</p>
+
+<div dir="rtl" style="font-family: 'Vazirmatn', 'Tahoma', sans-serif;">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+</style>
+
+## 🔍 این برنامه چیست؟ 
+یک ابزار بسیار ساده برای تبدیل یادداشت های روزمره به مقاله ویرایش شده آماده ثبت در کتاب
+
+## 💡 چرا این ابزار ایجاد شد؟
+پدر من تعداد خیلی زیادی دست نوشته از زمان جوانی با خود به همراه دارد که به دلیل اینکه خیلی از آنها با خط شکسته نوشته شده اند، توسط مدل های تصویر به متن قابل شناسایی نیستند. سریع ترین راهی که می توان این نوشته ها را به فایل متنی تبدیل کرد، این است که کسی این ها را بخواند و بر اساس متن آنها نوشتار ایحاد شود
+با اینکار می توان مطمین شد که نوشته ها و تجربیات ارزشمند پدرم برای نسل اینده حفظ می شود
+
+## 👥 این ابزار برای چه کسانی ایجاد شده است ؟
+برای کسانی مثل پدر من که کار کردن با چت جی پی تی یا ابزار های مشابه برای آنها بسیار سخت است ولی علاقه مند هستند تا تاثیر هوش مصنوعی را در زندگی خود ببینند
+
+
+## 📝 راهنمای استفاده
 این برنامه به شما امکان می‌دهد صدای فارسی را به متن تبدیل کنید. برای استفاده:
 
-1. **ضبط صدا**: روی دکمه "شروع ضبط" کلیک کنید و صحبت کنید
-2. **توقف ضبط**: پس از اتمام صحبت، روی دکمه "توقف" کلیک کنید
-3. **آپلود**: صدای ضبط شده را بررسی کرده و روی "آپلود صدا" کلیک کنید
-4. **پردازش**: پس از آپلود، روی دکمه "پردازش" کلیک کنید
-5. **دریافت متن**: متن پردازش شده را می‌توانید کپی یا دانلود کنید
+1. **🎤 ضبط صدا**: روی دکمه "شروع ضبط" کلیک کنید و صحبت کنید
+2. **⏹️ توقف ضبط**: پس از اتمام صحبت، روی دکمه "توقف" کلیک کنید
+3. **☁️ آپلود**: صدای ضبط شده را بررسی کرده و روی "آپلود صدا" کلیک کنید
+4. **⚙️ پردازش**: پس از آپلود، روی دکمه "پردازش" کلیک کنید
+5. **📋 دریافت متن**: متن پردازش شده را می‌توانید کپی یا دانلود کنید
 
-### ویژگی‌ها
+### ✨ ویژگی‌ها
 - تبدیل صدای فارسی به متن با دقت بالا
 - ویرایش خودکار متن و اضافه کردن علائم نگارشی
 - امکان دانلود متن پردازش شده
 - نگهداری تاریخچه فایل‌های صوتی
 - رابط کاربری ساده و کاربرپسند
 
-### نیازمندی‌ها
+### 🔧 نیازمندی‌ها
 - مرورگر مدرن با پشتیبانی از ضبط صدا
 - اتصال اینترنت پایدار
 - میکروفون
@@ -26,20 +47,30 @@
 
 ---
 
-# Persian Voice to Text Converter
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#api-configuration">API Configuration</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
+</p>
+
+# 🎤 Persian Voice to Text Converter
 
 A web application that converts Persian (Farsi) speech to text using Google Cloud Speech-to-Text API and enhances the output using OpenAI's GPT model.
 
-## Features
+## ✨ Features
 
-- Real-time audio recording
-- Persian speech-to-text conversion
-- Automatic text formatting and punctuation
-- File history management
-- Downloadable text output
-- Mobile-responsive design
+- 🎤 Real-time audio recording
+- 🈯 Persian speech-to-text conversion
+- ✍️ Automatic text formatting and punctuation
+- 📂 File history management
+- 💾 Downloadable text output
+- 📱 Mobile-responsive design
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Backend**: Python/Flask
 - **Frontend**: HTML, CSS, JavaScript
@@ -49,16 +80,16 @@ A web application that converts Persian (Farsi) speech to text using Google Clou
 - **Storage**: Google Cloud Storage
 - **Containerization**: Docker
 
-## Prerequisites
+## 📋 Prerequisites
 
 - Python 3.12+
 - Google Cloud Platform account
 - OpenAI API key
 - Docker (optional)
 
-## Installation
+## 🚀 Installation
 
-### Using Docker
+### 🐳 Using Docker
 
 1. Clone the repository:
 ```bash
@@ -77,7 +108,7 @@ cp .env.example .env
 docker-compose up --build
 ```
 
-### Manual Installation
+### 💻 Manual Installation
 
 1. Clone the repository:
 ```bash
@@ -108,7 +139,7 @@ export OPENAI_API_KEY=your-openai-api-key
 python app.py
 ```
 
-## Usage
+## 📱 Usage
 
 1. Open your browser and navigate to `http://localhost:5000`
 2. Click "Start Recording" to begin recording your Persian speech
@@ -117,7 +148,7 @@ python app.py
 5. After uploading, click "Process" to convert speech to text
 6. View, copy, or download the processed text
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 ├── app.py                 # Main Flask application
@@ -141,9 +172,9 @@ python app.py
 └── .env.example           # Example environment variables
 ```
 
-## API Configuration
+## ⚙️ API Configuration
 
-### Google Cloud Platform Setup
+### 🔑 Google Cloud Platform Setup
 
 1. Create a new project in Google Cloud Console
 2. Enable Speech-to-Text API
@@ -151,26 +182,26 @@ python app.py
 4. Download the service account key as JSON
 5. Place the JSON file in your project and set the path in environment variables
 
-### OpenAI Setup
+### 🤖 OpenAI Setup
 
 1. Create an account at [OpenAI](https://platform.openai.com/)
 2. Generate an API key from the dashboard
 3. Add the key to your environment variables
 
-## Development
+## 👨‍💻 Development
 
-### Running Tests
+### 🧪 Running Tests
 ```bash
 python -m pytest tests/
 ```
 
-### Code Style
+### 🧹 Code Style
 The project follows PEP 8 guidelines. Run linting with:
 ```bash
 flake8 .
 ```
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -178,20 +209,26 @@ flake8 .
 4. Push to the branch
 5. Create a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Support
+## 🆘 Support
 
 For support, please open an issue in the GitHub repository or contact the maintainer.
 
-## Author
+## 👤 Author
 
 Soheyl Daliraan - [Website](https://soheyl-daliraan.com)
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - Google Cloud Speech-to-Text API for speech recognition
 - OpenAI GPT for text enhancement
 - Flask framework and its community
+
+---
+
+<p align="center">
+  Made with ❤️ by Soheyl Daliraan
+</p>
