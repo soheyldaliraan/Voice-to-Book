@@ -56,13 +56,17 @@
 ---
 
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#api-configuration">API Configuration</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#license">License</a>
+  <a href="#-features">Features</a> •
+  <a href="#️-tech-stack">Tech Stack</a> •
+  <a href="#-prerequisites">Prerequisites</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-usage">Usage</a> •
+  <a href="#-project-structure">Project Structure</a> •
+  <a href="#️-api-configuration">API Configuration</a> •
+  <a href="#-development">Development</a> •
+  <a href="#-contributing">Contributing</a> •
+  <a href="#-license">License</a> •
+  <a href="#-support">Support</a>
 </p>
 
 # 🎤 Persian Voice to Text Converter
